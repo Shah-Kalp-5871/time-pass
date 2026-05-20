@@ -1,0 +1,42 @@
+'use client'
+
+import { SplineScene } from "@/components/ui/splite";
+import { Card } from "@/components/ui/card"
+import { Spotlight } from "@/components/ui/spotlight"
+ 
+export function SplineSceneBasic() {
+  return (
+    /* Base Card Container - Back to the clean, framed box layout */
+    <Card className="w-full h-[500px] bg-black/[0.96] relative overflow-hidden group z-0">
+      
+      {/* LAYER 1: The Interactive Spotlight Glow */}
+      <Spotlight className="z-10" size={380} />
+      
+      {/* LAYER 2: Text Content safely in front (z-20) */}
+      <div className="absolute inset-0 z-20 pointer-events-none flex h-full">
+        <div className="flex-1 p-8 md:p-12 flex flex-col justify-center pointer-events-auto max-w-xl">
+          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 leading-tight">
+            Interactive 3D
+          </h1>
+          <p className="mt-4 text-sm md:text-base text-neutral-300 max-w-md">
+            Bring your UI to life with beautiful 3D scenes. Create immersive experiences 
+            that capture attention and enhance your design.
+          </p>
+        </div>
+        {/* Balanced space layout */}
+        <div className="flex-1" />
+      </div>
+
+      {/* LAYER 3: The 3D Canvas back on its ambient backdrop layer (z-10) */}
+      <div className="absolute right-0 top-0 bottom-0 w-full md:w-[65%] -mr-16 z-10 pointer-events-none">
+        <div className="w-full h-full pointer-events-auto">
+          <SplineScene 
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className="w-full h-full bg-transparent"
+          />
+        </div>
+      </div>
+
+    </Card>
+  )
+}
