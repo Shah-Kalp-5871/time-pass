@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Spotlight } from "@/components/ui/spotlight";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +26,24 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      /* FIXED: Changed h-full to min-h-screen to lock the HTML boundary tightly to the device window size */
+      className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased dark`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      {/* FIXED: 
+          1. Removed flex-col which was breaking the absolute tracking coordinates.
+          2. Added w-full and min-h-screen to force the mouse listeners to read the entire screen.
+      */}
+      <body className="w-full min-h-screen relative overflow-x-hidden m-0 p-0 text-white bg-black/[0.96]">
+        
+        {/* GLOBAL LAYER: Now accurately maps your full monitor space */}
+        <Spotlight className="z-0" size={550} />
+        
+        {/* Content Layer floating smoothly on top */}
+        <main className="relative z-10 w-full min-h-screen">
+          {children}
+        </main>
+        
+      </body>
     </html>
   );
 }

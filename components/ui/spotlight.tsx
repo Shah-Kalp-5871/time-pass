@@ -29,7 +29,6 @@ export function Spotlight({
       const parent = containerRef.current.parentElement;
       if (parent) {
         parent.style.position = 'relative';
-        parent.style.overflow = 'hidden';
         setParentElement(parent);
       }
     }
@@ -41,8 +40,9 @@ export function Spotlight({
       const { left, top } = parentElement.getBoundingClientRect();
       mouseX.set(event.clientX - left);
       mouseY.set(event.clientY - top);
+      if (!isHovered) setIsHovered(true);
     },
-    [mouseX, mouseY, parentElement]
+    [mouseX, mouseY, parentElement, isHovered]
   );
 
   useEffect(() => {
