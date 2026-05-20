@@ -1,11 +1,15 @@
 import { SplineSceneBasic } from "@/components/demo";
+import { PortfolioScroll } from "@/components/portfolio-scroll";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-8">
-      <div className="w-full max-w-5xl">
-        <SplineSceneBasic />
+    <main>
+      <div className="min-h-screen flex items-center justify-center p-8 bg-black/[0.96]">
+        <div className="w-full max-w-5xl">
+          <SplineSceneBasic />
+        </div>
       </div>
-    </div>
+      <PortfolioScroll />
+    </main>
   );
 }
