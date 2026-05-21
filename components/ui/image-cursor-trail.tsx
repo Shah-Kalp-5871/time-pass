@@ -62,7 +62,7 @@ export function ImageCursorTrail({
     image.dataset.status = "inactive"
   }
 
-  const handleOnMove = (e: MouseEvent | Touch) => {
+  const handleOnMove = (e: { clientX: number; clientY: number }) => {
     if (distanceFromLast(e.clientX, e.clientY) > window.innerWidth / distance) {
       const lead = refs.current[globalIndex % refs.current.length].current
       const tail =
