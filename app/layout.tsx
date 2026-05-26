@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Spotlight } from "@/components/ui/spotlight";
 
@@ -10,6 +10,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
 });
 
@@ -27,7 +32,7 @@ export default function RootLayout({
     <html
       lang="en"
       /* FIXED: Changed h-full to min-h-screen to lock the HTML boundary tightly to the device window size */
-      className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} min-h-screen antialiased dark`}
     >
       {/* FIXED: 
           1. Removed flex-col which was breaking the absolute tracking coordinates.
