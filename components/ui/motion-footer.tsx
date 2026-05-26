@@ -275,12 +275,12 @@ export function CinematicFooter() {
       
       <div
         ref={wrapperRef}
-        className="relative h-screen w-full"
+        className="relative h-[100dvh] w-full"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
-        <footer className="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-black text-white cinematic-footer-wrapper border-t border-white/5">
+        <footer className="fixed bottom-0 left-0 flex h-[100dvh] w-full flex-col justify-between overflow-hidden bg-black text-white cinematic-footer-wrapper border-t border-white/5 pb-2">
           
-          <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] pointer-events-none z-0" />
+          <div className="footer-aurora absolute left-1/2 top-1/2 h-[50vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] pointer-events-none z-0" />
           <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none opacity-50" />
 
           <div
@@ -297,34 +297,34 @@ export function CinematicFooter() {
             </div>
           </div>
 
-          <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 mt-20 w-full max-w-5xl mx-auto">
+          <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 mt-16 md:mt-20 w-full max-w-5xl mx-auto">
             <h2
               ref={headingRef}
-              className="text-4xl md:text-7xl font-serif footer-text-glow tracking-tight mb-8 text-center"
+              className="text-4xl md:text-7xl font-serif footer-text-glow tracking-tight mb-4 md:mb-8 text-center"
             >
               Secure Your Allocation
             </h2>
 
-            <div ref={linksRef} className="flex flex-col items-center gap-10 w-full max-w-xl">
+            <div ref={linksRef} className="flex flex-col items-center gap-6 md:gap-10 w-full max-w-xl">
               <div className="w-full">
                 <WaitlistForm />
               </div>
 
-              <div className="flex flex-wrap justify-center gap-4 w-full mt-2">
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-6 py-3 rounded-full text-zinc-400 font-medium text-xs md:text-sm hover:text-white transition-colors">
+              <div className="flex flex-wrap justify-center gap-2 md:gap-4 w-full mt-0 md:mt-2">
+                <MagneticButton as="a" href="#" className="footer-glass-pill px-4 md:px-6 py-2.5 md:py-3 rounded-full text-zinc-400 font-medium text-[11px] md:text-sm hover:text-white transition-colors">
                   Contact Concierge
                 </MagneticButton>
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-6 py-3 rounded-full text-zinc-400 font-medium text-xs md:text-sm hover:text-white transition-colors">
+                <MagneticButton as="a" href="#" className="footer-glass-pill px-4 md:px-6 py-2.5 md:py-3 rounded-full text-zinc-400 font-medium text-[11px] md:text-sm hover:text-white transition-colors">
                   Privacy Policy
                 </MagneticButton>
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-6 py-3 rounded-full text-zinc-400 font-medium text-xs md:text-sm hover:text-white transition-colors">
+                <MagneticButton as="a" href="#" className="footer-glass-pill px-4 md:px-6 py-2.5 md:py-3 rounded-full text-zinc-400 font-medium text-[11px] md:text-sm hover:text-white transition-colors">
                   Terms of Service
                 </MagneticButton>
               </div>
             </div>
           </div>
 
-          <div className="relative z-20 w-full pb-8 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 mt-auto">
+          <div className="relative z-20 w-full pb-4 md:pb-8 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 mt-auto">
             
             <div className="text-zinc-600 text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1">
               © 2026 THE FYLEX. All rights reserved.

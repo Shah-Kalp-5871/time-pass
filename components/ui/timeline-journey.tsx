@@ -68,7 +68,7 @@ export const TimelineJourney = () => {
           {timelineData.map((item, index) => (
             <div 
               key={item.id} 
-              className="group relative flex h-[60vh] md:h-[65vh] w-[80vw] md:w-[40vw] flex-col overflow-hidden rounded-3xl bg-zinc-900 border border-white/10 shrink-0 cursor-pointer shadow-2xl"
+              className="group relative flex h-[60vh] md:h-[65vh] w-[85vw] md:w-[40vw] flex-col overflow-hidden rounded-3xl bg-zinc-900 border border-white/10 shrink-0 cursor-pointer shadow-2xl"
             >
               {/* Background Image with Hover Effect */}
               <div 

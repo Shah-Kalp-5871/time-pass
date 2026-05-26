@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 
@@ -18,7 +18,7 @@ export const ShuffleHero = () => {
         <p className="text-base md:text-lg text-zinc-400 my-8 max-w-md font-light leading-relaxed">
           Explore the myriad of textures, aerospace-grade materials, and engineering feats that make up The Fylex's inaugural masterpieces. Every angle tells a story.
         </p>
-        <button className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors">
+        <button suppressHydrationWarning className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors">
           View Collection
           <ArrowUpRight className="h-4 w-4" />
         </button>
@@ -82,7 +82,7 @@ const generateSquares = () => {
 
 const ShuffleGrid = () => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const [squares, setSquares] = useState<JSX.Element[]>([]);
+  const [squares, setSquares] = useState<React.ReactNode[]>([]);
 
   useEffect(() => {
     setSquares(generateSquares());

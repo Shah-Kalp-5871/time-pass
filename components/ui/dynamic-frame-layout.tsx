@@ -185,9 +185,18 @@ export function DynamicFrameLayout({
   gapSize = 8
 }: DynamicFrameLayoutProps) {
   const [frames] = useState<Frame[]>(initialFrames)
-  const [hovered, setHovered] = useState<{ row: number; col: number } | null>(null)
+  const [hovered, setHovered] = useState<{ row: number; col: number; id: number } | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const getRowSizes = () => {
+    if (isMobile) return undefined; // Let CSS handle mobile
     if (hovered === null) return "4fr 4fr 4fr"
     const { row } = hovered
     const nonHoveredSize = (12 - hoverSize) / 2
@@ -195,6 +204,7 @@ export function DynamicFrameLayout({
   }
 
   const getColSizes = () => {
+    if (isMobile) return undefined; // Let CSS handle mobile
     if (hovered === null) return "4fr 4fr 4fr"
     const { col } = hovered
     const nonHoveredSize = (12 - hoverSize) / 2
@@ -202,6 +212,7 @@ export function DynamicFrameLayout({
   }
 
   const getTransformOrigin = (x: number, y: number) => {
+    if (isMobile) return "center center"
     const vertical = y === 0 ? "top" : y === 4 ? "center" : "bottom"
     const horizontal = x === 0 ? "left" : x === 4 ? "center" : "right"
     return `${vertical} ${horizontal}`
@@ -209,8 +220,8 @@ export function DynamicFrameLayout({
 
   return (
     <div
-      className={`relative w-full h-full ${className}`}
-      style={{
+      className={`relative w-full h-full ${className} ${isMobile ? 'flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth p-4' : ''}`}
+      style={isMobile ? { gap: `${gapSize * 2}px` } : {
         display: "grid",
         gridTemplateRows: getRowSizes(),
         gridTemplateColumns: getColSizes(),
@@ -223,16 +234,20 @@ export function DynamicFrameLayout({
         const col = Math.floor(frame.defaultPos.x / 4)
         const transformOrigin = getTransformOrigin(frame.defaultPos.x, frame.defaultPos.y)
 
+        const isHoveredFrame = hovered?.id === frame.id
+
         return (
           <motion.div
             key={frame.id}
-            className="relative cursor-pointer"
+            className={`relative cursor-pointer shrink-0 ${isMobile ? 'snap-center rounded-2xl overflow-hidden shadow-2xl' : ''}`}
             style={{
               transformOrigin,
-              transition: "transform 0.4s ease",
+              transition: isMobile ? "none" : "transform 0.4s ease",
+              width: isMobile ? "80vw" : "100%",
+              height: "100%",
             }}
-            onMouseEnter={() => setHovered({ row, col })}
-            onMouseLeave={() => setHovered(null)}
+            onMouseEnter={() => !isMobile && setHovered({ row, col, id: frame.id })}
+            onMouseLeave={() => !isMobile && setHovered(null)}
           >
             <FrameComponent
               media={frame.media}
@@ -247,7 +262,7 @@ export function DynamicFrameLayout({
               borderThickness={frame.borderThickness}
               borderSize={frame.borderSize}
               showFrame={showFrames}
-              isHovered={hovered?.row === row && hovered?.col === col}
+              isHovered={isMobile || isHoveredFrame}
             />
           </motion.div>
         )

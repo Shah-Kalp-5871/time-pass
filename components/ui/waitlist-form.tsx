@@ -43,12 +43,12 @@ export function WaitlistForm() {
               onBlur={() => setIsFocused(false)}
               placeholder="Enter your email to join the waitlist..."
               required
-              className="flex-1 bg-transparent px-6 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-0"
+              className="flex-1 min-w-0 bg-transparent px-4 md:px-6 py-3 text-xs md:text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-0"
             />
             <button
               suppressHydrationWarning
               type="submit"
-              className="relative flex items-center justify-center p-3 ml-2 text-black bg-white rounded-full hover:bg-zinc-200 transition-colors"
+              className="relative flex items-center justify-center p-3 ml-2 shrink-0 text-black bg-white rounded-full hover:bg-zinc-200 transition-colors"
             >
               <ArrowRight className="w-5 h-5" />
             </button>

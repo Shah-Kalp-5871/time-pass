@@ -3,7 +3,8 @@
 import React, { useEffect } from "react"
 import Lenis from "@studio-freight/lenis"
 import { ImageCursorTrail } from "@/components/ui/image-cursor-trail"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Menu, X } from "lucide-react"
+import { useState } from "react"
 import {
   ImageComparison,
   ImageComparisonImage,
@@ -90,7 +91,7 @@ const bentoMediaItems = [
     title: "Heritage Collection",
     desc: "Timeless elegance",
     url: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg",
-    span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2",
+    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-3",
   },
   {
     id: 2,
@@ -98,7 +99,7 @@ const bentoMediaItems = [
     title: "The Mechanics",
     desc: "Swiss precision at its core.",
     url: "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg",
-    span: "md:col-span-2 md:row-span-2 col-span-1 sm:col-span-2 sm:row-span-2",
+    span: "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2",
   },
   {
     id: 3,
@@ -106,7 +107,7 @@ const bentoMediaItems = [
     title: "Night Lume",
     desc: "Radiance in the dark",
     url: "https://images.pexels.com/photos/280250/pexels-photo-280250.jpeg",
-    span: "md:col-span-1 md:row-span-3 sm:col-span-2 sm:row-span-2 ",
+    span: "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2 md:col-span-1 md:row-span-3",
   },
   {
     id: 4,
@@ -114,7 +115,7 @@ const bentoMediaItems = [
     title: "Sapphire Crystal",
     desc: "Unscratchable beauty",
     url: "https://images.pexels.com/photos/380782/pexels-photo-380782.jpeg",
-    span: "md:col-span-2 md:row-span-2 sm:col-span-1 sm:row-span-2 ",
+    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-2 md:row-span-2",
   },
   {
     id: 5,
@@ -122,7 +123,7 @@ const bentoMediaItems = [
     title: "Gold Master",
     desc: "Refined 18k accents",
     url: "https://images.pexels.com/photos/2113994/pexels-photo-2113994.jpeg",
-    span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2 ",
+    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-3",
   },
   {
     id: 6,
@@ -130,7 +131,7 @@ const bentoMediaItems = [
     title: "Aerospace Titanium",
     desc: "Light as a feather",
     url: "https://images.pexels.com/photos/277319/pexels-photo-277319.jpeg",
-    span: "md:col-span-2 md:row-span-2 sm:col-span-1 sm:row-span-2 ",
+    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-2 md:row-span-2",
   },
   {
     id: 7,
@@ -138,7 +139,7 @@ const bentoMediaItems = [
     title: "Legacy",
     desc: "Pass it to the next generation.",
     url: "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg",
-    span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2 ",
+    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-3",
   },
 ]
 
@@ -151,6 +152,8 @@ export default function Home() {
     }
     requestAnimationFrame(raf)
   }, [])
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const imageUrls = [
     "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg",
@@ -171,9 +174,15 @@ export default function Home() {
       {/* Top Floating Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 p-6 pointer-events-none">
         <nav className="mx-auto max-w-7xl rounded-2xl bg-black/40 border border-white/10 backdrop-blur-md px-6 py-4 flex items-center justify-between pointer-events-auto">
-          <div className="flex items-center gap-3 font-serif font-bold text-xl tracking-wider">
-            <span className="text-2xl text-zinc-400">Ф</span>
-            <span className="text-white">THE FYLEX</span>
+          <div className="flex items-center gap-4 group cursor-pointer">
+            <img 
+              src="/icon.png" 
+              alt="Fylex Logo" 
+              className="w-8 h-8 md:w-10 md:h-10 object-contain transition-transform duration-700 ease-in-out group-hover:scale-110"
+            />
+            <span className="text-white font-serif text-xl tracking-[0.2em] uppercase font-bold mt-1">
+              FYLEX
+            </span>
           </div>
           
           <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
@@ -182,11 +191,35 @@ export default function Home() {
             <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Boutiques</li>
           </ul>
 
-          <button suppressHydrationWarning onClick={scrollToFooter} className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors">
-            Join Waitlist
-            <ArrowUpRight className="h-4 w-4" />
-          </button>
+          <div className="flex items-center gap-4">
+            <button suppressHydrationWarning onClick={scrollToFooter} className="hidden md:flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors">
+              Join Waitlist
+              <ArrowUpRight className="h-4 w-4" />
+            </button>
+            <button 
+              suppressHydrationWarning
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+              className="md:hidden p-2 text-white hover:text-zinc-300 transition-colors"
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </nav>
+
+        {/* Mobile Dropdown Menu */}
+        <div className={`md:hidden absolute top-full left-6 right-6 mt-2 rounded-2xl bg-black/90 border border-white/10 backdrop-blur-xl transition-all duration-300 pointer-events-auto origin-top ${isMobileMenuOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'}`}>
+          <ul className="flex flex-col p-6 gap-6 text-center font-medium text-zinc-300">
+            <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Timepieces</li>
+            <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Savoir-Faire</li>
+            <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Boutiques</li>
+            <li className="pt-4 border-t border-white/10">
+              <button suppressHydrationWarning onClick={() => { scrollToFooter(); setIsMobileMenuOpen(false); }} className="w-full flex justify-center items-center gap-2 bg-white text-black px-5 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors">
+                Join Waitlist
+                <ArrowUpRight className="h-4 w-4" />
+              </button>
+            </li>
+          </ul>
+        </div>
       </header>
 
       {/* Main Content Wrapper (With high z-index and border radius for the cinematic footer reveal) */}
@@ -269,8 +302,8 @@ export default function Home() {
         {/* Image Comparison Section - Day vs Night Lume */}
         <section className="relative w-full bg-black py-32 px-6">
           <div className="max-w-6xl mx-auto w-full">
-            <h2 className="text-zinc-500 text-sm font-bold tracking-[0.3em] uppercase mb-16 text-center">Super-LumiNova® Engine</h2>
-            <ImageComparison className="aspect-[16/7] w-full rounded-2xl shadow-[0_0_50px_rgba(255,255,255,0.05)] border border-white/5" enableHover>
+            <h2 className="text-zinc-500 text-sm font-bold tracking-[0.3em] uppercase mb-8 md:mb-16 text-center">Super-LumiNova® Engine</h2>
+            <ImageComparison className="aspect-square md:aspect-[16/7] w-full rounded-2xl shadow-[0_0_50px_rgba(255,255,255,0.05)] border border-white/5" enableHover>
               <ImageComparisonImage
                 src="https://images.pexels.com/photos/280250/pexels-photo-280250.jpeg"
                 className="brightness-110"
