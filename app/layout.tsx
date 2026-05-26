@@ -38,7 +38,7 @@ export default function RootLayout({
           1. Removed flex-col which was breaking the absolute tracking coordinates.
           2. Added w-full and min-h-screen to force the mouse listeners to read the entire screen.
       */}
-      <body className="w-full min-h-screen relative overflow-x-hidden m-0 p-0 text-white bg-black/[0.96]">
+      <body className="w-full min-h-screen relative overflow-x-clip m-0 p-0 text-white bg-black/[0.96]">
         
         {/* GLOBAL LAYER: Now accurately maps your full monitor space */}
         <Spotlight className="z-0" size={550} />

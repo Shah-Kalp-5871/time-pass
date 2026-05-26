@@ -12,6 +12,7 @@ import {
 import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery"
 import FlowArt, { FlowSection } from "@/components/ui/story-scroll"
 import { ShuffleHero } from "@/components/ui/shuffle-grid"
+import { TimelineJourney } from "@/components/ui/timeline-journey"
 import { CinematicFooter } from "@/components/ui/motion-footer"
 import { WaitlistForm } from "@/components/ui/waitlist-form"
 import { DynamicFrameLayout, Frame } from "@/components/ui/dynamic-frame-layout"
@@ -166,7 +167,7 @@ export default function Home() {
   }
 
   return (
-    <div className="relative w-full bg-black min-h-screen font-sans selection:bg-white/20 overflow-x-hidden">
+    <div className="relative w-full bg-black min-h-screen font-sans selection:bg-white/20 overflow-x-clip">
       {/* Top Floating Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 p-6 pointer-events-none">
         <nav className="mx-auto max-w-7xl rounded-2xl bg-black/40 border border-white/10 backdrop-blur-md px-6 py-4 flex items-center justify-between pointer-events-auto">
@@ -213,6 +214,9 @@ export default function Home() {
         <div className="relative w-full bg-black py-16 border-t border-white/5">
           <ShuffleHero />
         </div>
+
+        {/* Master's Timeline Journey */}
+        <TimelineJourney />
 
         {/* Story Scroll Section */}
         <section className="relative w-full bg-[#09090b]">
