@@ -16,6 +16,7 @@ import { ShuffleHero } from "@/components/ui/shuffle-grid"
 import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery"
 import { Testimonials } from "@/components/ui/testimonials-columns-1"
 import FlowArt, { FlowSection } from "@/components/ui/story-scroll"
+import { FooterDemo } from "@/components/footer-demo"
 
 const bentoMediaItems = [
   {
@@ -311,6 +312,9 @@ export default function Home() {
         <ZoomParallax images={imageUrls.slice(0, 7).map(src => ({ src }))} />
         <div className="h-[20vh]" />
       </section>
+
+      {/* Interactive Physics Footer */}
+      <FooterDemo />
     </main>
   )
 }
