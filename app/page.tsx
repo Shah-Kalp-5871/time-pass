@@ -10,10 +10,9 @@ import {
   ImageComparisonImage,
   ImageComparisonSlider
 } from "@/components/ui/image-comparison"
-import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery"
+import { WatchPuzzle } from "@/components/ui/watch-puzzle"
 import FlowArt, { FlowSection } from "@/components/ui/story-scroll"
 import { ShuffleHero } from "@/components/ui/shuffle-grid"
-import { TimelineJourney } from "@/components/ui/timeline-journey"
 // import { CinematicFooter } from "@/components/ui/motion-footer" // unused: motion footer disabled as per client request
 
 import { WaitlistForm } from "@/components/ui/waitlist-form"
@@ -179,7 +178,7 @@ export default function Home() {
             <img
               src="/fylex-waitlist/icon.png"
               alt="Fylex Logo"
-              className="w-10 h-10 md:w-14 md:h-14 object-contain transition-all duration-700 ease-out group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+              className="w-16 h-16 md:w-16 md:h-16 object-contain transition-all duration-700 ease-out group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
             />
           </div>
           <span className="text-white font-serif tracking-[0.5em] uppercase text-[10px] mt-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0 text-shadow-sm">Fylex</span>
@@ -202,7 +201,7 @@ export default function Home() {
               Time <span className="text-zinc-500 italic lowercase font-light">reimagined</span>.
             </h1>
             <p className="mt-8 text-zinc-400 max-w-xl mx-auto text-lg md:text-xl font-light tracking-wide mix-blend-difference">
-              A new standard of horology. Masterfully crafted, extremely limited.
+              It's your time. Coming soon.
             </p>
             
             <div className="mt-12 w-full max-w-md mix-blend-difference">
@@ -212,10 +211,6 @@ export default function Home() {
         </section>
 
 
-
-
-        {/* Master's Timeline Journey */}
-        <TimelineJourney />
 
 
         {/* Image Comparison Section - Day vs Night Lume */}
@@ -268,20 +263,51 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Interactive Bento Gallery Section */}
-        <section className="relative w-full bg-black pt-10 pb-32">
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-20" />
-          <InteractiveBentoGallery
-            mediaItems={bentoMediaItems}
-            title="The Fylex Masterpieces"
-            description="Explore the defining details of our inaugural collection."
-          />
-        </section>
+        {/* Watch Puzzle Section */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <WatchPuzzle
+          imageUrl="/fylex-waitlist/fylex-watch.jpg"
+          title="The Fylex Masterpieces"
+          description="Drag & drop the pieces into place — or tap a tile, then tap its destination — to reveal the watch."
+        />
         
-        {/* Decorative Space before footer reveal */}
-        <div className="h-[20vh] w-full bg-black flex flex-col items-center justify-end pb-12 pointer-events-none">
-          <p className="text-zinc-500 uppercase tracking-[0.3em] text-xs font-bold mb-4">Keep Scrolling</p>
-          <div className="w-[1px] h-16 bg-gradient-to-b from-zinc-500 to-transparent" />
+        {/* Back to Top Section */}
+        <div className="w-full bg-black py-20 flex flex-col items-center justify-center gap-8 border-t border-white/5">
+          <p className="text-zinc-600 text-xs tracking-[0.4em] uppercase font-medium">Back to top</p>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-label="Scroll back to top"
+            className="group relative flex items-center justify-center w-16 h-16 rounded-full border border-zinc-800 bg-zinc-950 text-zinc-400 transition-all duration-500 hover:scale-110 hover:border-zinc-400 hover:text-white hover:shadow-[0_0_40px_rgba(255,255,255,0.12)]"
+          >
+            {/* Rotating ring */}
+            <svg
+              className="absolute inset-0 w-full h-full -rotate-90 transition-transform duration-700 group-hover:rotate-0"
+              viewBox="0 0 64 64"
+            >
+              <circle
+                cx="32" cy="32" r="30"
+                fill="none"
+                stroke="white"
+                strokeOpacity="0.08"
+                strokeWidth="1"
+              />
+              <circle
+                cx="32" cy="32" r="30"
+                fill="none"
+                stroke="white"
+                strokeOpacity="0.5"
+                strokeWidth="1"
+                strokeDasharray="188"
+                strokeDashoffset="141"
+                strokeLinecap="round"
+                className="transition-all duration-700 group-hover:stroke-opacity-100 group-hover:[stroke-dashoffset:0]"
+              />
+            </svg>
+            {/* Arrow icon */}
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5">
+              <path d="M12 19V5M5 12l7-7 7 7"/>
+            </svg>
+          </button>
         </div>
       </main>
 

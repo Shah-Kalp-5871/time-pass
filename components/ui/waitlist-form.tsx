@@ -2,57 +2,108 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, AlertCircle } from "lucide-react";
+
+// Validates a 10-digit Indian mobile number (or any 10-digit number)
+function validatePhone(phone: string): string | null {
+  const stripped = phone.replace(/\D/g, "");
+  if (!stripped) return "Please enter your mobile number.";
+  if (stripped.length < 10) return "Enter a valid 10-digit mobile number.";
+  if (stripped.length > 12) return "Number looks too long. Please check.";
+  return null;
+}
 
 export function WaitlistForm() {
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Allow only digits, spaces, dashes, plus sign
+    const val = e.target.value.replace(/[^\d\s\-+]/g, "");
+    setPhone(val);
+    if (error) setError(null); // clear error on type
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitted(true);
-      // Backend integration will happen later
-      console.log("Email submitted:", email);
+    const validationError = validatePhone(phone);
+    if (validationError) {
+      setError(validationError);
+      return;
     }
+    setIsSubmitted(true);
+    // Backend integration will happen later
+    console.log("Phone submitted:", phone.replace(/\D/g, ""));
   };
 
   return (
     <div className="w-full max-w-md mx-auto mt-8">
       <AnimatePresence mode="wait">
         {!isSubmitted ? (
-          <motion.form
+          <motion.div
             key="form"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            onSubmit={handleSubmit}
-            className={`relative flex items-center w-full p-1 rounded-full transition-all duration-300 ${
-              isFocused
-                ? "bg-white/10 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                : "bg-white/5 border-white/10"
-            } border backdrop-blur-md`}
+            className="flex flex-col gap-3"
           >
-            <input
-              suppressHydrationWarning
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              placeholder="Enter your email to join the waitlist..."
-              required
-              className="flex-1 min-w-0 bg-transparent px-4 md:px-6 py-3 text-xs md:text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-0"
-            />
-            <button
-              suppressHydrationWarning
-              type="submit"
-              className="relative flex items-center justify-center p-3 ml-2 shrink-0 text-black bg-white rounded-full hover:bg-zinc-200 transition-colors"
+            <motion.form
+              onSubmit={handleSubmit}
+              className={`relative flex items-center w-full p-1 rounded-full transition-all duration-300 ${
+                isFocused
+                  ? "bg-white/10 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                  : error
+                  ? "bg-red-500/5 border-red-500/40"
+                  : "bg-white/5 border-white/10"
+              } border backdrop-blur-md`}
             >
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </motion.form>
+              {/* Country code prefix */}
+              <span className="pl-4 pr-1 text-zinc-400 text-sm font-medium select-none shrink-0">
+                +91
+              </span>
+              <div className="w-px h-4 bg-white/15 mx-1 shrink-0" />
+
+              <input
+                suppressHydrationWarning
+                type="tel"
+                inputMode="numeric"
+                pattern="[0-9\s\-]*"
+                value={phone}
+                onChange={handleChange}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                placeholder="Enter your mobile number..."
+                autoComplete="tel"
+                maxLength={15}
+                className="flex-1 min-w-0 bg-transparent px-3 md:px-4 py-3 text-xs md:text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-0"
+              />
+              <button
+                suppressHydrationWarning
+                type="submit"
+                className="relative flex items-center justify-center p-3 ml-2 shrink-0 text-black bg-white rounded-full hover:bg-zinc-200 transition-colors"
+              >
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </motion.form>
+
+            {/* Inline error */}
+            <AnimatePresence>
+              {error && (
+                <motion.p
+                  key="error"
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  className="flex items-center gap-1.5 text-red-400 text-xs px-4"
+                >
+                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                  {error}
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </motion.div>
         ) : (
           <motion.div
             key="success"
@@ -67,7 +118,7 @@ export function WaitlistForm() {
               You're on the list.
             </p>
             <p className="text-zinc-400 text-sm">
-              We will notify you when The Fylex launches.
+              We'll reach out when The Fylex launches.
             </p>
           </motion.div>
         )}
