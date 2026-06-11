@@ -2,8 +2,8 @@
 
 import React, { useEffect } from "react"
 import Lenis from "@studio-freight/lenis"
-import { ImageCursorTrail } from "@/components/ui/image-cursor-trail"
-import { ArrowUpRight, Menu, X } from "lucide-react"
+// import { ImageCursorTrail } from "@/components/ui/image-cursor-trail" // unused: cursor trail disabled as per client request
+
 import { useState } from "react"
 import {
   ImageComparison,
@@ -14,7 +14,8 @@ import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery"
 import FlowArt, { FlowSection } from "@/components/ui/story-scroll"
 import { ShuffleHero } from "@/components/ui/shuffle-grid"
 import { TimelineJourney } from "@/components/ui/timeline-journey"
-import { CinematicFooter } from "@/components/ui/motion-footer"
+// import { CinematicFooter } from "@/components/ui/motion-footer" // unused: motion footer disabled as per client request
+
 import { WaitlistForm } from "@/components/ui/waitlist-form"
 import { DynamicFrameLayout, Frame } from "@/components/ui/dynamic-frame-layout"
 
@@ -89,9 +90,9 @@ const bentoMediaItems = [
     id: 1,
     type: "image",
     title: "Heritage Collection",
-    desc: "Timeless elegance",
-    url: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg",
-    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-3",
+    desc: "The timeless classic",
+    url: "fylex-waitlist/fylex-watch.jpg",
+    span: "col-span-1 row-span-4 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-3",
   },
   {
     id: 2,
@@ -99,7 +100,7 @@ const bentoMediaItems = [
     title: "The Mechanics",
     desc: "Swiss precision at its core.",
     url: "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg",
-    span: "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2",
+    span: "col-span-1 row-span-4 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2",
   },
   {
     id: 3,
@@ -107,7 +108,7 @@ const bentoMediaItems = [
     title: "Night Lume",
     desc: "Radiance in the dark",
     url: "https://images.pexels.com/photos/280250/pexels-photo-280250.jpeg",
-    span: "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2 md:col-span-1 md:row-span-3",
+    span: "col-span-1 row-span-4 sm:col-span-2 sm:row-span-2 md:col-span-1 md:row-span-3",
   },
   {
     id: 4,
@@ -115,7 +116,7 @@ const bentoMediaItems = [
     title: "Sapphire Crystal",
     desc: "Unscratchable beauty",
     url: "https://images.pexels.com/photos/380782/pexels-photo-380782.jpeg",
-    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-2 md:row-span-2",
+    span: "col-span-1 row-span-4 sm:col-span-1 sm:row-span-2 md:col-span-2 md:row-span-2",
   },
   {
     id: 5,
@@ -123,7 +124,7 @@ const bentoMediaItems = [
     title: "Gold Master",
     desc: "Refined 18k accents",
     url: "https://images.pexels.com/photos/2113994/pexels-photo-2113994.jpeg",
-    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-3",
+    span: "col-span-1 row-span-4 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-3",
   },
   {
     id: 6,
@@ -131,15 +132,15 @@ const bentoMediaItems = [
     title: "Aerospace Titanium",
     desc: "Light as a feather",
     url: "https://images.pexels.com/photos/277319/pexels-photo-277319.jpeg",
-    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-2 md:row-span-2",
+    span: "col-span-1 row-span-4 sm:col-span-1 sm:row-span-2 md:col-span-2 md:row-span-2",
   },
   {
     id: 7,
     type: "image",
     title: "Legacy",
-    desc: "Pass it to the next generation.",
-    url: "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg",
-    span: "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-3",
+    desc: "Generations of craft",
+    url: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg",
+    span: "col-span-1 row-span-4 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-3",
   },
 ]
 
@@ -153,7 +154,7 @@ export default function Home() {
     requestAnimationFrame(raf)
   }, [])
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
 
   const imageUrls = [
     "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg",
@@ -171,133 +172,51 @@ export default function Home() {
 
   return (
     <div className="relative w-full bg-black min-h-screen font-sans selection:bg-white/20 overflow-x-clip">
-      {/* Top Floating Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 p-6 pointer-events-none">
-        <nav className="mx-auto max-w-7xl rounded-2xl bg-black/40 border border-white/10 backdrop-blur-md px-6 py-4 flex items-center justify-between pointer-events-auto">
-          <div className="flex items-center gap-4 group cursor-pointer">
-            <img 
-              src="/icon.png" 
-              alt="Fylex Logo" 
-              className="w-8 h-8 md:w-10 md:h-10 object-contain transition-transform duration-700 ease-in-out group-hover:scale-110"
+      {/* Floating Center Header */}
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
+        <nav className="pointer-events-auto flex flex-col items-center justify-center group cursor-pointer">
+          <div className="bg-black/20 backdrop-blur-xl border border-white/10 p-3 md:p-4 rounded-full shadow-[0_0_30px_rgba(255,255,255,0.05)] transition-all duration-700 ease-out hover:bg-white/5 hover:border-white/20 hover:scale-110">
+            <img
+              src="/fylex-waitlist/icon.png"
+              alt="Fylex Logo"
+              className="w-10 h-10 md:w-14 md:h-14 object-contain transition-all duration-700 ease-out group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
             />
-            <span className="text-white font-serif text-xl tracking-[0.2em] uppercase font-bold mt-1">
-              FYLEX
-            </span>
           </div>
-          
-          <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-            <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Timepieces</li>
-            <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Savoir-Faire</li>
-            <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Boutiques</li>
-          </ul>
-
-          <div className="flex items-center gap-4">
-            <button suppressHydrationWarning onClick={scrollToFooter} className="hidden md:flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors">
-              Join Waitlist
-              <ArrowUpRight className="h-4 w-4" />
-            </button>
-            <button 
-              suppressHydrationWarning
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              className="md:hidden p-2 text-white hover:text-zinc-300 transition-colors"
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
+          <span className="text-white font-serif tracking-[0.5em] uppercase text-[10px] mt-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0 text-shadow-sm">Fylex</span>
         </nav>
-
-        {/* Mobile Dropdown Menu */}
-        <div className={`md:hidden absolute top-full left-6 right-6 mt-2 rounded-2xl bg-black/90 border border-white/10 backdrop-blur-xl transition-all duration-300 pointer-events-auto origin-top ${isMobileMenuOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'}`}>
-          <ul className="flex flex-col p-6 gap-6 text-center font-medium text-zinc-300">
-            <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Timepieces</li>
-            <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Savoir-Faire</li>
-            <li className="hover:text-white transition-colors cursor-pointer tracking-wide">Boutiques</li>
-            <li className="pt-4 border-t border-white/10">
-              <button suppressHydrationWarning onClick={() => { scrollToFooter(); setIsMobileMenuOpen(false); }} className="w-full flex justify-center items-center gap-2 bg-white text-black px-5 py-3 rounded-full text-sm font-semibold hover:bg-zinc-200 transition-colors">
-                Join Waitlist
-                <ArrowUpRight className="h-4 w-4" />
-              </button>
-            </li>
-          </ul>
-        </div>
       </header>
+
+
+
+
+
+
 
       {/* Main Content Wrapper (With high z-index and border radius for the cinematic footer reveal) */}
       <main className="relative z-10 w-full min-h-[120vh] bg-black text-white rounded-b-[2rem] md:rounded-b-[4rem] border-b border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col">
         
-        {/* Hero Section with Cursor Trail */}
-        <section className="relative w-full min-h-screen">
-          <ImageCursorTrail items={imageUrls} maxNumberOfImages={5} distance={20} fadeAnimation={true}>
-            <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pointer-events-auto min-h-screen pt-20">
-              <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-[0.85] font-serif text-white uppercase mix-blend-difference">
-                Time <span className="text-zinc-500 italic lowercase font-light">reimagined</span>.
-              </h1>
-              <p className="mt-8 text-zinc-400 max-w-xl mx-auto text-lg md:text-xl font-light tracking-wide mix-blend-difference">
-                A new standard of horology. Masterfully crafted, extremely limited.
-              </p>
-              
-              <div className="mt-12 w-full max-w-md mix-blend-difference">
-                <WaitlistForm />
-              </div>
+        {/* Hero Section */}
+        <section className="relative w-full h-screen flex items-center justify-center pt-24">
+          <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pointer-events-auto">
+            <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-[0.85] font-serif text-white uppercase mix-blend-difference">
+              Time <span className="text-zinc-500 italic lowercase font-light">reimagined</span>.
+            </h1>
+            <p className="mt-8 text-zinc-400 max-w-xl mx-auto text-lg md:text-xl font-light tracking-wide mix-blend-difference">
+              A new standard of horology. Masterfully crafted, extremely limited.
+            </p>
+            
+            <div className="mt-12 w-full max-w-md mix-blend-difference">
+              <WaitlistForm />
             </div>
-          </ImageCursorTrail>
+          </div>
         </section>
 
-        {/* Shuffle Grid Showcase */}
-        <div className="relative w-full bg-black py-16 border-t border-white/5">
-          <ShuffleHero />
-        </div>
+
+
 
         {/* Master's Timeline Journey */}
         <TimelineJourney />
 
-        {/* Story Scroll Section */}
-        <section className="relative w-full bg-[#09090b]">
-          <FlowArt aria-label="About The Fylex">
-            <FlowSection aria-label="The Heritage" style={{ backgroundColor: '#09090b', color: '#fff' }}>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">01 — The Heritage</p>
-              <hr className="my-[2vw] border-t border-white/10" />
-              <div>
-                <h2 className="text-[clamp(3.5rem,12vw,14rem)] font-bold leading-[0.85] tracking-tighter font-serif uppercase">
-                  Swiss<br />Precision
-                </h2>
-              </div>
-              <hr className="my-[2vw] border-t border-white/10" />
-              <p className="mt-auto max-w-[50ch] text-[clamp(1rem,2.5vw,2rem)] font-light leading-relaxed text-zinc-300">
-                Forged in the heart of the Alps, The Fylex represents a century of untamed mechanical obsession. We don't just measure time; we sculpt it.
-              </p>
-            </FlowSection>
-
-            <FlowSection aria-label="The Craft" style={{ backgroundColor: '#111', color: '#fff' }}>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">02 — The Craft</p>
-              <hr className="my-[2vw] border-t border-white/10" />
-              <div>
-                <h2 className="text-[clamp(3.5rem,12vw,14rem)] font-bold leading-[0.85] tracking-tighter font-serif uppercase">
-                  Obsessive<br />Detail
-                </h2>
-              </div>
-              <hr className="my-[2vw] border-t border-white/10" />
-              <p className="max-w-[50ch] text-[clamp(1rem,2.5vw,2rem)] font-light leading-relaxed text-zinc-300">
-                Over 300 micro-components hand-polished to perfection. Every tourbillon tells a story of relentless human ambition.
-              </p>
-              <hr className="my-[2vw] border-t border-white/10" />
-              <div className="flex flex-wrap gap-[3vw]">
-                <div className="min-w-[180px] flex-1">
-                  <p className="mb-2 text-sm font-bold uppercase tracking-wider text-zinc-400">Materials</p>
-                  <p className="text-[clamp(0.85rem,1.3vw,1.05rem)] leading-relaxed text-zinc-300">Aerospace-grade titanium paired with 18k rose gold.</p>
-                </div>
-                <div className="min-w-[180px] flex-1">
-                  <p className="mb-2 text-sm font-bold uppercase tracking-wider text-zinc-400">Movement</p>
-                  <p className="text-[clamp(0.85rem,1.3vw,1.05rem)] leading-relaxed text-zinc-300">In-house calibre FX-9 with a staggering 72-hour power reserve.</p>
-                </div>
-                <div className="min-w-[180px] flex-1">
-                  <p className="mb-2 text-sm font-bold uppercase tracking-wider text-zinc-400">Finish</p>
-                  <p className="text-[clamp(0.85rem,1.3vw,1.05rem)] leading-relaxed text-zinc-300">Sapphire crystal casing reveals the beating mechanical heart.</p>
-                </div>
-              </div>
-            </FlowSection>
-          </FlowArt>
-        </section>
 
         {/* Image Comparison Section - Day vs Night Lume */}
         <section className="relative w-full bg-black py-32 px-6">
@@ -323,22 +242,29 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Dynamic Video Frame Section */}
+        {/* Dynamic Video Frame Section / The Gallery */}
         <section className="relative w-full bg-black py-20 px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-zinc-500 text-sm font-bold tracking-[0.3em] uppercase mb-4">The Showcase</h2>
-            <h3 className="text-4xl md:text-5xl font-serif text-white tracking-tight">Interactive Cinema</h3>
-            <p className="mt-4 text-zinc-400 font-light max-w-lg mx-auto">Hover over the frames to experience the craftsmanship in motion.</p>
-          </div>
-          
-          <div className="w-full max-w-6xl mx-auto h-[60vh] md:h-[80vh] rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(255,255,255,0.05)] border border-white/5">
-            <DynamicFrameLayout 
-              frames={dynamicFrames} 
-              className="w-full h-full bg-[#09090b]" 
-              hoverSize={6}
-              gapSize={4}
-              showFrames={false}
-            />
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <div className="w-full lg:w-1/3 text-center lg:text-left flex flex-col items-center lg:items-start">
+              <h2 className="text-zinc-500 text-sm font-bold tracking-[0.3em] uppercase mb-4">The Gallery</h2>
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white tracking-tight leading-[1.1]">A Symphony of<br className="hidden lg:block"/> Craftsmanship</h3>
+              <p className="mt-6 text-zinc-400 font-light max-w-lg mx-auto lg:mx-0 leading-relaxed text-lg">
+                Explore the myriad of textures, aerospace-grade materials, and engineering feats that make up The Fylex's inaugural masterpieces. Every angle tells a story.
+              </p>
+              <button suppressHydrationWarning className="mt-8 px-8 py-3 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-colors flex items-center gap-2">
+                View Collection
+              </button>
+            </div>
+            
+            <div className="w-full lg:w-2/3 h-[50vh] md:h-[60vh] lg:h-[70vh] rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(255,255,255,0.05)] border border-white/5 relative">
+              <DynamicFrameLayout 
+                frames={dynamicFrames} 
+                className="w-full h-full bg-[#09090b]" 
+                hoverSize={6}
+                gapSize={4}
+                showFrames={false}
+              />
+            </div>
           </div>
         </section>
 
@@ -359,8 +285,28 @@ export default function Home() {
         </div>
       </main>
 
-      {/* The Cinematic Footer */}
-      <CinematicFooter />
+      {/* MOTION FOOTER DISABLED AS PER CLIENT REQUEST - Commented out CinematicFooter and removed its visual from the page */}
+      {/* <CinematicFooter /> */}
+
+      {/* ELEVATED FOOTER */}
+      <footer className="w-full py-24 bg-black border-t border-white/5 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-zinc-500/50 to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-6 relative z-10">
+          <img
+            src="/fylex-waitlist/icon.png"
+            alt="Fylex Logo"
+            className="w-10 h-10 object-contain opacity-50 hover:opacity-100 transition-opacity duration-500"
+          />
+          <p className="text-white font-serif text-3xl md:text-5xl tracking-[0.3em] uppercase bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-500">
+            Fylex
+          </p>
+          <p className="text-zinc-600 tracking-[0.2em] uppercase text-[10px] mt-4">
+            © {new Date().getFullYear()} The Fylex. All rights reserved.
+          </p>
+        </div>
+      </footer>
+
     </div>
+
   )
 }
