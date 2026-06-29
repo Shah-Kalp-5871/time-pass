@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, AlertCircle } from "lucide-react";
+import Swal from 'sweetalert2';
 
 // Validates a 10-digit Indian mobile number (or any 10-digit number)
 function validatePhone(phone: string): string | null {
@@ -26,16 +27,40 @@ export function WaitlistForm() {
     if (error) setError(null); // clear error on type
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const validationError = validatePhone(phone);
     if (validationError) {
       setError(validationError);
       return;
     }
-    setIsSubmitted(true);
-    // Backend integration will happen later
-    console.log("Phone submitted:", phone.replace(/\D/g, ""));
+    
+    try {
+      const response = await fetch('/fylex-waitlist/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ phone: phone.replace(/\D/g, "") }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
+
+      setPhone("");
+      Swal.fire({
+        title: 'Success!',
+        text: 'User registration successful!',
+        icon: 'success',
+        background: '#18181b', // dark background matching site
+        color: '#ffffff', // white text
+        confirmButtonColor: '#10b981',
+      });
+    } catch (err) {
+      console.error(err);
+      setError("Failed to register. Please try again.");
+    }
   };
 
   return (
@@ -104,24 +129,7 @@ export function WaitlistForm() {
               )}
             </AnimatePresence>
           </motion.div>
-        ) : (
-          <motion.div
-            key="success"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex flex-col items-center justify-center space-y-3 py-4"
-          >
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-500/20 text-green-400">
-              <Check className="w-6 h-6" />
-            </div>
-            <p className="text-white text-lg font-medium font-serif tracking-wide">
-              You're on the list.
-            </p>
-            <p className="text-zinc-400 text-sm">
-              We'll reach out when The Fylex launches.
-            </p>
-          </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </div>
   );
